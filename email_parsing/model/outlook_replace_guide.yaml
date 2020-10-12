@@ -1,0 +1,11 @@
+---
+  - msg_file_path: 'D:\Data\Set1'
+  - attachments_download_path: 'D:\Data\Set1\Output'
+    replace_rules:
+      - find: 'Thank you'
+      - replace_with: 'Thank you very much'
+      - find: 2020/09/02 (水) 15:50 
+      - replace_with: '2020/09/04 (金) 23:20'
+      - find: 'FCIPL' 
+      - replace_with: 'Fujitsu India Pvt Ltd.'
+      
