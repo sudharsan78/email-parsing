@@ -1,4 +1,5 @@
 import json
+import logging
 
 
 class JsonUtils:
@@ -14,4 +15,5 @@ class JsonUtils:
         file_name = json_meta.get('message_id')
         with open(f'{path}/{file_name}.json', 'w') as outfile:
             json.dump(json_meta, outfile, indent=4)
+        logging.debug('json file created successfully')
         return True

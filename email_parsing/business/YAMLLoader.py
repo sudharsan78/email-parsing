@@ -1,3 +1,5 @@
+import logging
+
 import yaml
 
 from model.instruction import Instruction
@@ -13,6 +15,7 @@ class YAMLLoader:
         :return: instruction object or None
         """
         with open(self.file_path) as yaml_file:
+            logging.debug('started parsing yaml file')
             data = yaml.load(yaml_file, yaml.FullLoader)
 
         if data:
@@ -22,5 +25,7 @@ class YAMLLoader:
                 replace_rules.update({replace_rules_list[index]['find']: replace_rules_list[index+1]['replace_with']})
 
             instruction = Instruction(data[0]['msg_file_path'], data[1]['attachments_download_path'], replace_rules)
+            logging.debug('yaml file parsed successfully')
             return instruction
+        logging.debug('empty yaml file')
         return None

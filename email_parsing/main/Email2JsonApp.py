@@ -1,6 +1,7 @@
 import os
 import sys
 import glob
+import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from business.YAMLLoader import YAMLLoader
@@ -15,6 +16,9 @@ class Email2Json:
         Parse email file and extract data and create json file with the email meta data
         :return: no of json file created
         """
+        logging.basicConfig(level=logging.DEBUG)
+        logging.debug('Started email to json parsing')
+
         yaml_file_path = self.get_yaml_file()
         yaml_loader = YAMLLoader(yaml_file_path)
         instruction = yaml_loader.parse_yaml()
@@ -46,9 +50,9 @@ class Email2Json:
                     file_path = yaml_file
                     got_file_path = True
                 else:
-                    print("Error : The entered YAML file doesn't exists")
+                    logging.error("The entered YAML file doesn't exists")
             else:
-                print('Error : Invalid file format. Please enter YAML file path only')
+                logging.error("Invalid file format. Please enter YAML file path only")
         return file_path
 
 

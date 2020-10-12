@@ -1,5 +1,6 @@
 import re
 import os
+import logging
 from email import message_from_file
 
 
@@ -29,6 +30,7 @@ class EmailParser:
         :param msg: message to extract header data
         :return: header dictionary
         """
+        logging.debug('parsing mail header')
         return {
             'message_id': re.findall(r'<(.+?)>', msg.get('message-id'))[0],
             'from': re.findall(r'<(.+?)>', msg.get('from'))[0],
@@ -45,6 +47,7 @@ class EmailParser:
         :param msg: message to extract message body data
         :return: message body dictionary
         """
+        logging.debug('parsing mail body')
         body_dic = {}
         if msg.is_multipart():
             for payload in msg.walk():
@@ -84,6 +87,7 @@ class EmailParser:
         :param message_id: message id to create folder for attachments
         :return: list of attachments details
         """
+        logging.debug('Downloading attachments')
         attachment_list = []
         attachment_dir_path = self.instruction_obj.attachments_download_path
         if not os.path.isdir(attachment_dir_path):
